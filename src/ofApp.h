@@ -43,5 +43,6 @@ class ofApp : public ofBaseApp{
 		vector<Rect> vecIniRect;
 		vector< vector<Rect> > vecOutRect;
 
-		
+		/* keep track of number of changes*/
+		int global_counter=0;
 };

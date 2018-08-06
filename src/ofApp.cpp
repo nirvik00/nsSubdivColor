@@ -8,12 +8,12 @@
 
 void ofApp::setup() {
 	srand(time(NULL));
-
+	ofSetWindowTitle("Subdivision");
 	vecIniRect.clear();
 	vecOutRect.clear();
 	vecParentVec.clear();
 	vecBoundaryRect.clear();
-
+	
 	/* ONE RECT ONLY */
 	//int U = 2; int V = 1;
 
@@ -73,6 +73,7 @@ void ofApp::draw() {
 	ofSetColor(255, 255, 255); ofFill(); ofDrawRectangle(0, 0, 1200, 750); ofNoFill();
 	ofSetColor(0, 0, 0);
 	ofDrawBitmapString("Press 'c' to change color scheme", 10, 600);
+	ofDrawBitmapString("Press 'p' to take a  screen-shot", 10, 615);
 	ofDrawBitmapString("Nirvik Saha\nDennis Shelden\nJohn Haymaker", 10, 650);
 	for (int i = 0; i < vecBoundaryRect.size(); i++) {
 		Rect R = vecBoundaryRect[i];
@@ -119,12 +120,19 @@ void ofApp::draw() {
 }
 
 void ofApp::keyPressed(int key){
-	if (key != 'c') {
-
+	if ((key == 'c') || (key == 'p')) {
+		//do not set-up
+	}else{
 		setup();
 	}	
 	if (key == 'c') {
 		colrArStructVec = ar.genColorVec();
+	}
+	if (key == 'p') {
+		global_counter++;
+		ofImage screenshot;
+		screenshot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
+		screenshot.saveImage("img"+to_string(global_counter) + ".png");
 	}
 }
 
@@ -141,7 +149,6 @@ void ofApp::mouseDragged(int x, int y, int button){
 }
 
 void ofApp::mousePressed(int x, int y, int button){
-	setup();
 }
 
 void ofApp::mouseReleased(int x, int y, int button){
